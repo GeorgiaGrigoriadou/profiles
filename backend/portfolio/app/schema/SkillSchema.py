@@ -1,7 +1,9 @@
 # schemas.py
+from typing import List
 
 from pydantic import BaseModel, PydanticUserError
 from app.model.models import User
+from app.model import models
 
 
 class SkillBase(BaseModel):
@@ -20,7 +22,9 @@ class Skill(SkillBase):
     id: int
     user_id: int  # Add user_id field
 
-
     class Config:
         orm_mode = True
 
+
+class SkillsByUser(BaseModel):
+    skills: list[SkillBase] = []

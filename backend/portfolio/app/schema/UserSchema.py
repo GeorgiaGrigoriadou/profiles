@@ -12,6 +12,8 @@ class UserBase(BaseModel):
     phone: str
     email: str
 
+    # skills: list[SkillSchema.SkillBase] = []
+
     class Config:
         orm_mode = True
         arbitrary_types_allowed = True
@@ -23,6 +25,7 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     id: int
+    skills: list[Skill] = []  # Include skills field of type List[Skill]
 
     class Config:
         orm_mode = True
@@ -31,6 +34,7 @@ class User(UserBase):
 
 class UserWithSkills(UserBase):
     skills: list[SkillSchema.SkillBase] = []
+
 
 # projects: list[models.Project] = []
 
