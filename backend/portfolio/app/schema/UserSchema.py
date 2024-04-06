@@ -4,9 +4,13 @@ from pydantic import BaseModel, ConfigDict
 from app.schema import SkillSchema
 from app.schema import ProjectSchema
 from app.schema import EducationSchema
+from app.schema import SocialSchema
+from app.schema import ExperienceSchema
 from app.model.models import Skill
 from app.model.models import Project
 from app.model.models import Education
+from app.model.models import Experience
+from app.model.models import Social
 
 
 class UserBase(BaseModel):
@@ -29,9 +33,11 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     id: int
-    skills: list[Skill] = []  # Include skills field of type List[Skill]
+    skills: list[Skill] = []
     projects: list[Project] = []
-    educations: list[Education] = []
+    education: list[Education] = []
+    social: list[Social] = []
+    experiences: list[Experience] = []
 
     class Config:
         orm_mode = True
@@ -49,8 +55,18 @@ class UserWithProjects(UserBase):
 class UserWithEducation(UserBase):
     education: list[EducationSchema.EducationBase] = []
 
-# projects: list[models.Project] = []
 
-#
-# experiences: list[models.Experience] = []
-# social_profiles: list[models.SocialProfile] = []
+class UserWithSocial(UserBase):
+    social: list[SocialSchema.SocialBase] = []
+
+
+class UserWithExperience(UserBase):
+    experience: list[ExperienceSchema.ExperienceBase] = []
+
+
+class UserWithAll(UserBase):
+    skills: list[SkillSchema.SkillBase] = []
+    projects: list[ProjectSchema.ProjectBase] = []
+    education: list[EducationSchema.EducationBase] = []
+    experience: list[ExperienceSchema.ExperienceBase] = []
+    social: list[SocialSchema.SocialBase] = []

@@ -19,7 +19,7 @@ class ProjectCreate(ProjectBase):
 
 class Project(ProjectBase):
     id: int
-    user_id: int  # Add user_id field
+    user_id: int
 
     class Config:
         orm_mode = True
@@ -29,8 +29,3 @@ class Project(ProjectBase):
 class ProjectByUser(BaseModel):
     projects: list[ProjectBase] = []
 
-# projects: list[models.Project] = []
-
-# educations: list[models.Education] = []
-# experiences: list[models.Experience] = []
-# social_profiles: list[models.SocialProfile] = []

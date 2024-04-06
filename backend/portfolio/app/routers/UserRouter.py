@@ -47,6 +47,14 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     return UserCrud.delete_user(db, user_id)
 
 
+@router.get("/users/{user_id}/all", response_model=UserSchema.UserWithAll)
+def get_user_with_skills(user_id: int, db: Session = Depends(get_db)):
+    db_user = db.get(models.User, user_id)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return db_user
+
+
 ################### SKILL ###########################################
 @router.get("/users/{user_id}/allskills", response_model=UserSchema.UserWithSkills)
 def get_user_with_skills(user_id: int, db: Session = Depends(get_db)):

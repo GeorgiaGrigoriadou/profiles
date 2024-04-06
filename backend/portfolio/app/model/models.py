@@ -15,14 +15,12 @@ class User(Base):
     about = Column(String)
     phone = Column(String)
     email = Column(String)
+
     skills = relationship("Skill", back_populates="user")
     projects = relationship("Project", back_populates="user")
     education = relationship("Education", back_populates="user")
     social = relationship("Social", back_populates="user")
-
-
-#   experiences = relationship("Experience", back_populates="user")
-
+    experiences = relationship("Experience", back_populates="user")
 
 
 class Skill(Base):
@@ -75,29 +73,27 @@ class Social(Base):
     user = relationship("User", back_populates="social")
 
 
+class Experience(Base):
+    __tablename__ = 'experience'
 
-# class Experience(Base):
-#     __tablename__ = 'experience'
-#
-#     id = Column(Integer, primary_key=True, index=True)
-#     job = Column(String, unique=True, index=True)
-#     description = Column(String, unique=True, index=True)
-#     start_at = Column(DateTime, unique=True, index=True)
-#     end_at = Column(DateTime, unique=True, index=True)
-#
-#     user_id = Column(Integer, ForeignKey('user.id'))
-#     job_type = Column(Integer, ForeignKey('job.id'))
-#     # Add other fields as needed
-#     user = relationship("User", back_populates="education")
-#     job_types = relationship("User", back_populates="job_type")
-#
-#
-# class Job_type(Base):
-#     __tablename__ = 'job_type'
-#
-#     id = Column(Integer, primary_key=True, index=True)
-#     name = Column(String, unique=True, index=True)
-#     # Add other fields as needed
-#
-#     experiences = relationship("experience", back_populates="job_type")
-#
+    id = Column(Integer, primary_key=True, index=True)
+    job = Column(String, unique=True, index=True)
+    description = Column(String, unique=True, index=True)
+    start_at = Column(DateTime, unique=True, index=True)
+    end_at = Column(DateTime, unique=True, index=True)
+
+    user_id = Column(Integer, ForeignKey('user.id'))
+    job_type_id = Column(Integer, ForeignKey('job_type.id'))
+
+    user = relationship("User", back_populates="experiences")
+    job_type = relationship("JobType", back_populates="experiences")
+
+
+class JobType(Base):
+    __tablename__ = 'job_type'
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, unique=True, index=True)
+
+    experiences = relationship("Experience", back_populates="job_type")
+

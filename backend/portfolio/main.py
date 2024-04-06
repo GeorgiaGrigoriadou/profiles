@@ -7,8 +7,10 @@ from app import database
 from app.routers import UserRouter
 from app.routers import SkillRouter
 from app.routers import ProjectRouter
-from app.routers import EducationRouter
+from app.routers import ExperienceRouter
 from app.routers import SocialRouter
+from app.routers import EducationRouter
+from app.routers import JobTypeRouter
 
 import uvicorn
 
@@ -22,6 +24,8 @@ app.include_router(SkillRouter.router)
 app.include_router(ProjectRouter.router)
 app.include_router(EducationRouter.router)
 app.include_router(SocialRouter.router)
+app.include_router(ExperienceRouter.router)
+app.include_router(JobTypeRouter.router)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
