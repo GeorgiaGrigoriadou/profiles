@@ -47,7 +47,7 @@ def update_education(education_id: int, education: EducationSchema.EducationCrea
 
 @router.delete("/education/{education_id}", response_model=None)
 def delete_education(education_id: int, db: Session = Depends(get_db)):
-    db_education = EducationCrud.delete_education(db, education_id)
+    db_education = EducationCrud.get_education_by_id(db, education_id)
     if db_education is None:
         raise HTTPException(status_code=404, detail="project not found")
     EducationCrud.delete_education(db, education_id)

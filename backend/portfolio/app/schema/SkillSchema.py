@@ -1,9 +1,5 @@
 # schemas.py
-from typing import List
-
-from pydantic import BaseModel, PydanticUserError
-from app.model.models import User
-from app.model import models
+from pydantic import BaseModel
 
 
 class SkillBase(BaseModel):

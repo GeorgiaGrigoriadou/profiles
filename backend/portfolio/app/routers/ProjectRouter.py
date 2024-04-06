@@ -47,7 +47,7 @@ def update_project(project_id: int, project: ProjectSchema.ProjectCreate, db: Se
 
 @router.delete("/project/{project_id}", response_model=None)
 def delete_project(project_id: int, db: Session = Depends(get_db)):
-    db_project = ProjectCrud.delete_project(db, project_id)
+    db_project = ProjectCrud.get_project_by_id(db, project_id)
     if db_project is None:
         raise HTTPException(status_code=404, detail="project not found")
     ProjectCrud.delete_project(db, project_id)

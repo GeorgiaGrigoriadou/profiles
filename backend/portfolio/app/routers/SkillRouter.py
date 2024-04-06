@@ -47,7 +47,7 @@ def update_skill(skill_id: int, skill: SkillSchema.SkillCreate, db: Session = De
 
 @router.delete("/skill/{skill_id}", response_model=None)
 def delete_skill(skill_id: int, db: Session = Depends(get_db)):
-    db_skill = SkillCrud.delete_skill(db, skill_id)
+    db_skill = SkillCrud.get_skill_by_id(db, skill_id)
     if db_skill is None:
         raise HTTPException(status_code=404, detail="skill not found")
     SkillCrud.delete_skill(db, skill_id)

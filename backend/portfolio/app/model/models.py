@@ -18,8 +18,11 @@ class User(Base):
     skills = relationship("Skill", back_populates="user")
     projects = relationship("Project", back_populates="user")
     education = relationship("Education", back_populates="user")
+    social = relationship("Social", back_populates="user")
+
+
 #   experiences = relationship("Experience", back_populates="user")
-#   social_profiles = relationship("SocialProfile", back_populates="user")
+
 
 
 class Skill(Base):
@@ -29,7 +32,7 @@ class Skill(Base):
     name = Column(String, unique=True, index=True)
     description = Column(String)
     user_id = Column(Integer, ForeignKey('user.id'))
-    # Add other fields as needed
+
     user = relationship("User", back_populates="skills")
 
 
@@ -42,7 +45,7 @@ class Project(Base):
     description = Column(String, unique=True, index=True)
 
     user_id = Column(Integer, ForeignKey('user.id'))
-    # Add other fields as needed
+
     user = relationship("User", back_populates="projects")
 
 
@@ -56,35 +59,23 @@ class Education(Base):
     end_at = Column(DateTime, index=True)
 
     user_id = Column(Integer, ForeignKey('user.id'))
-    # Add other fields as needed
+
     user = relationship("User", back_populates="education")
 
-# # class SocialProfile(Base):
-# #     __tablename__ = 'social_profile'
-# #
-# #     id = Column(Integer, primary_key=True, index=True)
-# #     url = Column(String, unique=True, index=True)
-# #     user_id = Column(Integer, ForeignKey('user.id'))
-# #     social_id = Column(Integer, ForeignKey('social.id'))
-# #
-# #     user = relationship("User", back_populates="social_profiles")
-# #     Social = relationship("Social", back_populates="social_profiles")
-# #     # Add other fields as needed
-# #
-# #
-# # class Social(Base):
-# #     __tablename__ = 'social'
-# #
-# #     id = Column(Integer, primary_key=True, index=True)
-# #     name = Column(String, unique=True, index=True)
-# #     # Add other fields as needed
-# #
-# #     social_profiles = relationship("SocialProfile", back_populates="social")
-# #
-# #
+
+class Social(Base):
+    __tablename__ = 'social'
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, unique=True, index=True)
+    url = Column(String, unique=True, index=True)
+
+    user_id = Column(Integer, ForeignKey('user.id'))
+
+    user = relationship("User", back_populates="social")
 
 
-#
+
 # class Experience(Base):
 #     __tablename__ = 'experience'
 #
