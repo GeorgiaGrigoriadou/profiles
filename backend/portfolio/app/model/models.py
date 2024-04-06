@@ -16,15 +16,11 @@ class User(Base):
     phone = Column(String)
     email = Column(String)
     skills = relationship("Skill", back_populates="user")
+    projects = relationship("Project", back_populates="user")
+    education = relationship("Education", back_populates="user")
+#   experiences = relationship("Experience", back_populates="user")
+#   social_profiles = relationship("SocialProfile", back_populates="user")
 
-
-#
-#     #     # experiences = relationship("Experience", back_populates="user")
-#     #     # educations = relationship("Education", back_populates="user")
-#
-#
-# #     # social_profiles = relationship("SocialProfile", back_populates="user")
-# #     # projects = relationship("Project", back_populates="user")
 
 class Skill(Base):
     __tablename__ = 'skill'
@@ -35,6 +31,33 @@ class Skill(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     # Add other fields as needed
     user = relationship("User", back_populates="skills")
+
+
+class Project(Base):
+    __tablename__ = 'project'
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, unique=True, index=True)
+    image = Column(String, unique=True, index=True)
+    description = Column(String, unique=True, index=True)
+
+    user_id = Column(Integer, ForeignKey('user.id'))
+    # Add other fields as needed
+    user = relationship("User", back_populates="projects")
+
+
+class Education(Base):
+    __tablename__ = 'education'
+
+    id = Column(Integer, primary_key=True, index=True)
+    organization = Column(String, unique=True, index=True)
+    description = Column(String, unique=True, index=True)
+    start_at = Column(DateTime, index=True)
+    end_at = Column(DateTime, index=True)
+
+    user_id = Column(Integer, ForeignKey('user.id'))
+    # Add other fields as needed
+    user = relationship("User", back_populates="education")
 
 # # class SocialProfile(Base):
 # #     __tablename__ = 'social_profile'
@@ -61,34 +84,6 @@ class Skill(Base):
 # #
 
 
-#
-# class Project(Base):
-#     __tablename__ = 'project'
-#
-#     id = Column(Integer, primary_key=True, index=True)
-#     name = Column(String, unique=True, index=True)
-#     image = Column(String, unique=True, index=True)
-#     description = Column(String, unique=True, index=True)
-#
-#     user_id = Column(Integer, ForeignKey('user.id'))
-#     # Add other fields as needed
-#     user = relationship("User", back_populates="project")
-#
-#
-# class Education(Base):
-#     __tablename__ = 'education'
-#
-#     id = Column(Integer, primary_key=True, index=True)
-#     organization = Column(String, unique=True, index=True)
-#     image = Column(String, unique=True, index=True)
-#     description = Column(String, unique=True, index=True)
-#     start_at = Column(DateTime, unique=True, index=True)
-#     end_at = Column(DateTime, unique=True, index=True)
-#
-#     user_id = Column(Integer, ForeignKey('user.id'))
-#     # Add other fields as needed
-#     user = relationship("User", back_populates="education")
-#
 #
 # class Experience(Base):
 #     __tablename__ = 'experience'

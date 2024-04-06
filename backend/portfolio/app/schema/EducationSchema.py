@@ -5,17 +5,16 @@ from datetime import date
 
 class EducationBase(BaseModel):
     organization: str
-    image: str
     description: str
     start_at: date
     end_at: date
 
+    class Config:
+        orm_mode = True
+        arbitrary_types_allowed = True
+
 
 class EducationCreate(EducationBase):
-    pass
-
-
-class EducationUpdate(EducationBase):
     pass
 
 
@@ -25,3 +24,8 @@ class Education(EducationBase):
 
     class Config:
         orm_mode = True
+        arbitrary_types_allowed = True
+
+
+class EducationByUser(BaseModel):
+    education: list[EducationBase] = []

@@ -1,12 +1,8 @@
-from typing import List
-
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
-from app.crud import UserCrud
 from app.crud import SkillCrud
 from app.model import models
-from app.schema import UserSchema
 from app.schema import SkillSchema
 
 router = APIRouter()
@@ -53,6 +49,6 @@ def update_skill(skill_id: int, skill: SkillSchema.SkillCreate, db: Session = De
 def delete_skill(skill_id: int, db: Session = Depends(get_db)):
     db_skill = SkillCrud.delete_skill(db, skill_id)
     if db_skill is None:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail="skill not found")
     SkillCrud.delete_skill(db, skill_id)
     return None
