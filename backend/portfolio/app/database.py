@@ -3,7 +3,7 @@ from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 from app.model import models
 
-SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://root:gg035@localhost/mydb"
+
 
 # Create the SQLAlchemy engine
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
