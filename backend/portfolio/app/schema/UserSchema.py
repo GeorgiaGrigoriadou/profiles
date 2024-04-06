@@ -1,8 +1,8 @@
 # schemas.py
 
-from pydantic import BaseModel
-from typing import Optional
-from app.model import models
+from pydantic import BaseModel, ConfigDict
+from app.schema import SkillSchema
+from app.model.models import Skill
 
 
 class UserBase(BaseModel):
@@ -23,11 +23,17 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     id: int
-    # projects: list[models.Project] = []
-    # skills: list[models.Skill] = []
-    # educations: list[models.Education] = []
-    # experiences: list[models.Experience] = []
-    # social_profiles: list[models.SocialProfile] = []
 
     class Config:
         orm_mode = True
+        arbitrary_types_allowed = True
+
+
+class UserWithSkills(UserBase):
+    skills: list[SkillSchema.SkillBase] = []
+
+# projects: list[models.Project] = []
+
+# educations: list[models.Education] = []
+# experiences: list[models.Experience] = []
+# social_profiles: list[models.SocialProfile] = []
